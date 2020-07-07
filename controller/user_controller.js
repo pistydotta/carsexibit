@@ -39,7 +39,7 @@ function register(req, res) {
             res.redirect("back")
         } else {
             passport.authenticate("local")(req, res, () => {
-                req.flash("success", "Welcome to CarsExibit " + err.username)
+                req.flash("success", "Welcome to CarsExibit " + user.username)
                 res.redirect('/cars')
             
         })
