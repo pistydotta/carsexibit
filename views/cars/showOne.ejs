@@ -1,0 +1,40 @@
+<%- include ("../partials/header.ejs") %>
+
+<div>
+
+    <h2><%=car.name%></h2>
+    <img src="<%=car.image%>" alt="">
+    <p style="font-size: 14px; font-weight: bold;">Submited By <%= car.author.username %></p>
+
+    <% if(currentUser && car.author.id.equals(currentUser._id)){ %>
+    <p>
+        <a style="display: inline;" class="ui button green small" href="/cars/<%=car._id%>/edit">EDIT CAR</a>
+
+    <form style="display:inline;" action="/cars/<%=car._id%>?_method=DELETE" method="POST">
+        <button style="margin-bottom: 50px;" class="ui button red small">DELETE CAR</button>
+    </form>
+    </p>
+
+
+
+    <% } %>
+
+    <a class="ui button olive" style="margin-bottom: 50px;" href="/cars/<%=car._id%>/comments/new">Add new comment</a>
+
+
+    <% comments.forEach((comment) => { %>
+    <p><b><%=comment.author.username%></b> - <%=comment.text%></p>
+    <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+    <a class="ui button mini green" href="/cars/<%=car._id%>/comments/<%=comment._id%>/edit">Edit</a>
+    <form style="display: inline;" action="/cars/<%=car._id%>/comments/<%=comment._id%>?_method=DELETE" method="post">
+        <button class="ui button red mini">Delete</button>
+    </form>
+    <% } %>
+
+    <% }) %>
+
+    <p><a class="ui button orange" style="margin-top: 50px;" href="/cars">Go Back</a></p>
+
+</div>
+
+<%- include ("../partials/footer.ejs")  %>

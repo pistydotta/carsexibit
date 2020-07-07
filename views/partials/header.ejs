@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car's Exibit Show</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+</head>
+<body>
+    <div class="ui tablet computer only padded grid">
+        <div class="ui top fixed borderless fluid huge menu">
+            <div class="ui container">
+                <a class="item" href="/cars">Home</a>
+                <div class="right menu">
+                    <% if(currentUser == undefined) {  %>
+                    <a class="item" href="/login">Login</a>
+                    <a class="item" href="/register">Sign Up</a>
+                    <% } else { %>
+                    <a class="item">Logged as <%=currentUser.username%></a>
+                    <a class="item" href="/logout">Logout</a>
+                    <% } %>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div style="padding-top: 55px;">
+    <div class="container">
+        <% if(error && error.length > 0) { %>
+        <div class="alert alert-danger" role="alert">
+            <h1><%= error %></h1>
+        </div>
+        <% } else if(success && success.length > 0) { %>
+        <div class="alert alert-success" role="alert">
+            <h1><%= success %></h1>
+        </div>
+        <% } %>
+    </div>
+    
+    
+        
+

@@ -1,0 +1,9 @@
+<%- include ("../partials/header.ejs") %>
+<h1>You're editing your comment</h1>
+
+<form action="/cars/<%=car_id%>/comments/<%=comment._id%>?_method=PUT" method="post">
+    <textarea name="text" id=""  cols="50" rows="2"><%=comment.text%></textarea>
+    <p><button class="ui button blue">Submit!</button></p>
+</form>
+
+<%- include ("../partials/footer.ejs") %>   

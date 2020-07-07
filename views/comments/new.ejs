@@ -1,0 +1,10 @@
+<%- include ("../partials/header.ejs") %>
+<h1>You're adding a new comment to <%=car.name%></h1>
+
+<form action="/cars/<%=car._id%>/comments" method="post">
+    <textarea name="text" id="" placeholder="Your Comment Goes Here" cols="50" rows="2"></textarea>
+    <p><button class="ui button blue">Submit!</button></p>
+    
+</form>
+
+<%- include ("../partials/footer.ejs") %>

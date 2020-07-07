@@ -1,0 +1,14 @@
+<%- include ("../partials/header.ejs") %>
+<h1>Enjoy the list of our beloved selected Cars</h1>
+<a class="ui primary button" href="/cars/new">Add a new car</a>
+
+<% cars.forEach(function(car){ %>
+    <div>
+        <h2><%=car.name%></h2>
+        <img style="max-width: 200px; width: 100%;" src="<%=car.image%>" alt="">
+        <p><a class="ui button" href="/cars/<%=car._id%>">See More</a></p>
+        
+    </div>
+<% }); %>
+
+<%- include ("../partials/footer.ejs")  %>

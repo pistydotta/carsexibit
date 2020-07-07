@@ -1,0 +1,9 @@
+<%- include ("../partials/header.ejs")  %>
+<h1>You're adding a new car to the database</h1>
+
+<form action="/cars" method="POST">
+    <input type="text" placeholder="Name" name="car[name]">
+    <input type="text" placeholder="Image" name="car[image]">
+    <button>Submit</button>
+</form>
+<%- include ("../partials/footer.ejs")  %>
