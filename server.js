@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 let port = process.env.PORT
-const db = require('./config/db_connection')
 const flash = require('connect-flash')
 const methodOverride = require("method-override")
 const bodyParser = require("body-parser")
@@ -15,6 +14,18 @@ const Comment = require('./models/comment_model')
 const carRoutes = require("./routes/car_routes")
 const indexRoutes = require('./routes/index_routes')
 const userRoutes = require('./routes/user_routes')
+const Mongoose = require('mongoose')
+const url = 'mongodb+srv://pistydotta:gaspeidinho@carsexibitdb.eupyn.gcp.mongodb.net/carsexibitDB?retryWrites=true&w=majority'
+
+Mongoose.connect(url, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+}).then(() => {
+    console.log('Connected to db')
+}).catch(err => {
+    console.log('ERROR: ', err.message)
+})
+
 
 
 app.use(flash())
@@ -38,7 +49,7 @@ app.set("view engine", "ejs")
 app.use(express.static("views"))
 
 
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
     res.locals.currentUser = req.user
     res.locals.error = req.flash("error")
     res.locals.success = req.flash("success")
