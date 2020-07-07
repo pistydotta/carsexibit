@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-let port = 3000
+let port = process.env.PORT
 const db = require('./config/db_connection')
 const flash = require('connect-flash')
 const methodOverride = require("method-override")
