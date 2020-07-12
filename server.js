@@ -16,10 +16,10 @@ const indexRoutes = require('./routes/index_routes')
 const userRoutes = require('./routes/user_routes')
 const Mongoose = require('mongoose')
 const url = 'mongodb+srv://pistydotta:gaspeidinho@carsexibitdb.eupyn.gcp.mongodb.net/carsexibitDB?retryWrites=true&w=majority'
-let port = process.env.PORT
+//let port = process.env.PORT
 
 //const url = 'mongodb://localhost:27017/carsexibitDB'
-//let port = 3000
+let port = 3000
 
 
 Mongoose.connect(url, {
