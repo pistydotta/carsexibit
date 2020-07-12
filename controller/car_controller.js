@@ -4,32 +4,10 @@ const express = require("express")
 const Comment = require('../models/comment_model')
 
 
-function showEditForm(req, res){
-    Car.findById(req.params.id, (err, foundCar) => {
-        if(err) return console.log(err)
-        res.render('cars/edit', {car: foundCar})
-    })
-}
-
 function showCars(req, res){
     Car.find({}, (err, cars) => {
         if(err) return console.log(err)
         res.render("cars/showPage", {cars: cars})
-    })
-}
-
-function destroyCar(req, res){
-    Car.findByIdAndDelete(req.params.id, (err, removedCar) => {
-        if(err) return console.log(err)
-        res.redirect("/cars")
-    })
-}
-
-function editCar(req, res){
-    Car.findByIdAndUpdate(req.params.id, req.body.car, (err, edittedCar) => {
-        if(err) return console.log("deubom n")
-        console.log(edittedCar)
-        res.redirect("/cars/" + edittedCar._id)
     })
 }
 
@@ -63,7 +41,30 @@ function showOne(req, res){
     })
 }
 
+function showEditForm(req, res){
+    Car.findById(req.params.id, (err, foundCar) => {
+        if(err) return console.log(err)
+        res.render('cars/edit', {car: foundCar})
+    })
+}
 
+function editCar(req, res){
+    Car.findByIdAndUpdate(req.params.id, req.body.car, (err, edittedCar) => {
+        if(err) return console.log("deubom n")
+        console.log(edittedCar)
+        res.redirect("/cars/" + edittedCar._id)
+    })
+}
+
+function destroyCar(req, res){
+    Car.findByIdAndDelete(req.params.id, (err, removedCar) => {
+        if(err) return console.log(err)
+        Comment.deleteMany({posted_on: removedCar._id}, (err, deletedComments) => {
+            res.redirect("/cars")
+        })
+        
+    })
+}
 
 
 module.exports = {showCars, addCar, createCar, showOne, showEditForm, editCar, destroyCar}
