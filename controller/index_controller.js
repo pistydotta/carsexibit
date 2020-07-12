@@ -1,5 +1,5 @@
 function homePage(req, res){
-    res.render('index/homePage')
+    res.redirect('/cars')
 }
 
 function notFound(req, res){

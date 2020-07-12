@@ -1,9 +1,26 @@
 <%- include ("../partials/header.ejs")  %>
-<h1>You're adding a new car to the database</h1>
 
-<form action="/cars" method="POST">
-    <input type="text" placeholder="Name" name="car[name]">
-    <input type="text" placeholder="Image" name="car[image]">
-    <button>Submit</button>
-</form>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center;">Adding a car!</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/cars" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="car[name]" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="car[image]" placeholder="Image">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="car[description]" placeholder="Description">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit</button>
+                </div>
+            </form>
+            <a href="/cars">Go Back</a>
+        </div>
+    </div>
+</div>
+
 <%- include ("../partials/footer.ejs")  %>

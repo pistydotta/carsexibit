@@ -1,14 +1,29 @@
 <%- include ("../partials/header.ejs") %>
-<h1>Enjoy the list of our beloved selected Cars</h1>
-<a class="ui primary button" href="/cars/new">Add a new car</a>
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome!</h1>
+            <p>Enjoy the list of our beloved selected Cars</p>
+            <p><a class="btn btn-primary btn-large" href="/cars/new">Add a new car</a></p>
+        </div>
+    </header>
 
-<% cars.forEach(function(car){ %>
-    <div>
-        <h2><%=car.name%></h2>
-        <img style="max-width: 200px; width: 100%;" src="<%=car.image%>" alt="">
-        <p><a class="ui button" href="/cars/<%=car._id%>">See More</a></p>
-        
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% cars.forEach(function(car){ %>
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%=car.image%>" alt="">
+                <div class="caption">
+                    <h4><%=car.name%></h4>
+                </div>
+            </div>
+            <p>
+                <a class="btn btn-primary" href="/cars/<%=car._id%>">See More</a>
+            </p>
+        </div>
+        <% }); %>
     </div>
-<% }); %>
+</div>
+
 
 <%- include ("../partials/footer.ejs")  %>

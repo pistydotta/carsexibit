@@ -4,6 +4,7 @@ const ObjectId = Schema.ObjectId
 
 const CommentSchema = new Schema({
     text: String,
+    createdAt: {type: Date, default: Date.now},
     author: {
         id: {
           type: Schema.Types.ObjectId,

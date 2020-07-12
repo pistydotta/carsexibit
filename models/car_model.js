@@ -5,6 +5,8 @@ const ObjectId = Schema.ObjectId
 const CarSchema = new Schema({
     name: String,
     image: String,
+    description: String,
+    createdAt: {type: Date, default: Date.now},
     author: {
       id: {
         type: Schema.Types.ObjectId,

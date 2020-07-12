@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-let port = process.env.PORT
+
 const flash = require('connect-flash')
 const methodOverride = require("method-override")
 const bodyParser = require("body-parser")
@@ -15,7 +15,12 @@ const carRoutes = require("./routes/car_routes")
 const indexRoutes = require('./routes/index_routes')
 const userRoutes = require('./routes/user_routes')
 const Mongoose = require('mongoose')
-const url = 'mongodb+srv://pistydotta:gaspeidinho@carsexibitdb.eupyn.gcp.mongodb.net/carsexibitDB?retryWrites=true&w=majority'
+//const url = 'mongodb+srv://pistydotta:gaspeidinho@carsexibitdb.eupyn.gcp.mongodb.net/carsexibitDB?retryWrites=true&w=majority'
+//let port = process.env.PORT
+
+const url = 'mongodb://localhost:27017/carsexibitDB'
+let port = 3000
+
 
 Mongoose.connect(url, {
     useUnifiedTopology: true,
@@ -26,7 +31,7 @@ Mongoose.connect(url, {
     console.log('ERROR: ', err.message)
 })
 
-
+app.locals.moment = require('moment')
 
 app.use(flash())
 
@@ -47,7 +52,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.set("view engine", "ejs")
 app.use(express.static("views"))
-
+app.use(express.static(__dirname + '/public'))
 
 app.use(function (req, res, next) {
     res.locals.currentUser = req.user

@@ -1,40 +1,54 @@
 <%- include ("../partials/header.ejs") %>
 
-<div>
 
-    <h2><%=car.name%></h2>
-    <img src="<%=car.image%>" alt="">
-    <p style="font-size: 14px; font-weight: bold;">Submited By <%= car.author.username %></p>
-
-    <% if(currentUser && car.author.id.equals(currentUser._id)){ %>
-    <p>
-        <a style="display: inline;" class="ui button green small" href="/cars/<%=car._id%>/edit">EDIT CAR</a>
-
-    <form style="display:inline;" action="/cars/<%=car._id%>?_method=DELETE" method="POST">
-        <button style="margin-bottom: 50px;" class="ui button red small">DELETE CAR</button>
-    </form>
-    </p>
-
-
-
-    <% } %>
-
-    <a class="ui button olive" style="margin-bottom: 50px;" href="/cars/<%=car._id%>/comments/new">Add new comment</a>
-
-
-    <% comments.forEach((comment) => { %>
-    <p><b><%=comment.author.username%></b> - <%=comment.text%></p>
-    <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
-    <a class="ui button mini green" href="/cars/<%=car._id%>/comments/<%=comment._id%>/edit">Edit</a>
-    <form style="display: inline;" action="/cars/<%=car._id%>/comments/<%=comment._id%>?_method=DELETE" method="post">
-        <button class="ui button red mini">Delete</button>
-    </form>
-    <% } %>
-
-    <% }) %>
-
-    <p><a class="ui button orange" style="margin-top: 50px;" href="/cars">Go Back</a></p>
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= car.image %>">
+                <div class="caption-full">
+                    <h4><a><%=car.name%></a></h4>
+                    <p><%=car.description%></p>
+                    <p>
+                        <em>Submitted By <%= car.author.username %>, <%=moment(car.createdAt).fromNow()%></em>
+                    </p>
+                    <% if(currentUser && car.author.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-md btn-warning" href="/car/<%= car._id %>/edit">Edit</a>
+                            <form id="delete-form" action="/cars/<%= car._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-md btn-danger">Delete</button>
+                            </form>
+                            <% }%>
+                </div>
+            </div>
+            <div class="well">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/cars/<%= car._id %>/comments/new">Add New
+                        Comment</a>
+                </div>
+                <hr>
+                <% comments.forEach(function(comment){ %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <strong><%= comment.author.username %></strong>
+                        <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
+                        <p>
+                            <%= comment.text %>
+                        </p>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                        <a class="btn btn-sm btn-warning"
+                            href="/cars/<%=car._id %>/comments/<%=comment._id %>/edit">Edit</a>
+                        <form id="delete-form" action="/cars/<%=car._id %>/comments/<%=comment._id %>?_method=DELETE"
+                            method="POST">
+                            <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                        </form>
+                        <% } %>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <a href="/cars">Go Back</a>
 </div>
 
 <%- include ("../partials/footer.ejs")  %>
