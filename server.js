@@ -1,4 +1,5 @@
 const express = require('express')
+require('./config/db_connect')
 const app = express()
 
 const flash = require('connect-flash')
@@ -7,29 +8,15 @@ const bodyParser = require("body-parser")
 const passport = require('passport')
 const localStrategy = require('passport-local')
 
-const Car = require('./models/car_model')
 const User = require('./models/user_model')
-const Comment = require('./models/comment_model')
 
 const carRoutes = require("./routes/car_routes")
 const indexRoutes = require('./routes/index_routes')
 const userRoutes = require('./routes/user_routes')
-const Mongoose = require('mongoose')
-const url = 'mongodb+srv://pistydotta:gaspeidinho@carsexibitdb.eupyn.gcp.mongodb.net/carsexibitDB?retryWrites=true&w=majority'
-let port = process.env.PORT || 3000
-
-//const url = 'mongodb://localhost:27017/carsexibitDB'
-//let port = 3000
+let port = process.env.PORT || 3005
 
 
-Mongoose.connect(url, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true
-}).then(() => {
-    console.log('Connected to db')
-}).catch(err => {
-    console.log('ERROR: ', err.message)
-})
+
 
 app.locals.moment = require('moment')
 
